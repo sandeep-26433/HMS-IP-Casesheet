@@ -1,0 +1,82 @@
+SCHEMA
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'taf_bookings';
+
+
+
+Doctor to Appointment and Appointment to Doctor(STATE)
+
+1)CREATE OR REPLACE FUNCTION update_doctor_appointments_state()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.state <> OLD.state THEN
+    UPDATE Doctor_APPOINTMENTS
+    SET state = NEW.state
+    WHERE patient_id = NEW.patient_id;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+2)CREATE TRIGGER after_update_appointment_booking
+AFTER UPDATE ON Appointment_Booking
+FOR EACH ROW
+EXECUTE FUNCTION update_doctor_appointments_state();
+
+3)CREATE OR REPLACE FUNCTION update_appointment_booking_state()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.state <> OLD.state THEN
+    UPDATE Appointment_Booking
+    SET state = NEW.state
+    WHERE patient_id = NEW.patient_id;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+4)CREATE TRIGGER after_update_doctor_appointments
+AFTER UPDATE ON Doctor_APPOINTMENTS
+FOR EACH ROW
+EXECUTE FUNCTION update_appointment_booking_state();
+
+
+FOR UNDO
+-- Drop the trigger for Appointment_Booking table
+DROP TRIGGER IF EXISTS after_update_appointment_booking ON Appointment_Booking;
+
+-- Drop the trigger for Doctor_APPOINTMENTS table
+DROP TRIGGER IF EXISTS after_update_doctor_appointments ON Doctor_APPOINTMENTS;
+
+-- Drop the function for updating Doctor_APPOINTMENTS state
+DROP FUNCTION IF EXISTS update_doctor_appointments_state;
+
+-- Drop the function for updating Appointment_Booking state
+DROP FUNCTION IF EXISTS update_appointment_booking_state;
+
+
+
+TAF TO DOCTOR APPOINTMENTS
+
+CREATE OR REPLACE FUNCTION update_status_from_state() 
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE taf_bookings
+    SET status = NEW.state
+    WHERE user_id = NEW.patient_id;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_status_trigger
+AFTER UPDATE ON doctor_appointments
+FOR EACH ROW
+WHEN (OLD.state IS DISTINCT FROM NEW.state)
+EXECUTE FUNCTION update_status_from_state();
+
+FOR UNDO 
+
+DROP TRIGGER IF EXISTS update_status_trigger ON doctor_appointments;
+
+

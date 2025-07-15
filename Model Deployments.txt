@@ -1,0 +1,23 @@
+EXISTING MODELS
+Step 1 : Open Putty
+Step 2 : ubuntu@ip address
+Step 3 : Auth-Credential-Import Edvenswa Ayurveda Putty File
+Step 4 : Black Screen Opens
+Step 5: cd /opt/odoo/addons
+Step 6: ls (List of Modules will appear)
+Step 7 : cd dr_home(enter module)
+Step 8 : ls
+Step 9 : 
+
+
+FOR NEW : SUDO NANO APPOINTMENTBOOKING.PY(eXISTING)
+          SUDO NANO (mODEL nAME) FOR NEW
+		  ALL SMALL LETTERSS
+		  
+		  sudo cat (filename) ex:appointment_booking.py -----for copying code
+		  
+		  
+		  
+
+
+		  

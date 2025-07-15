@@ -1,0 +1,32 @@
+name...sudo -u postgres createuser -s odoo
+
+manikanta 
+
+
+[options]
+admin_passwd = admin
+db_host = False
+db_port = False
+db_user = odoo
+db_password = False
+addons_path = /opt/odoo/addons
+
+TO run ODD..... cd /opt/odoo
+                source venv/bin/activate
+                python3 /opt/odoo/odoo-bin --config=/etc/odoo.conf
+TO RUN POSTGRES DATABASE.....psql -h localhost -U odoo -d postgres(WE SHOULD RUN BOTH THESE SO THAT IF WE CHANGE ANYTHING IT REFELECTS)
+ 
+
+
+./odoo-bin scaffold TAF addons/........ TO ADD A NEW FOLDER IN ADDONS
+
+
+
+to know where its running.....
+sudo lsof -i :8069
+
+to kill it sudo kill -9 12345(users has diff)
+
+ 
+ubuntu@16.171.159.22
+ubuntu@16.171.30.61

@@ -1,0 +1,71 @@
+
+ubuntu@16.171.30.61
+./odoo-bin --addons-path=addons,odoo/addons --db-filter=odoo --http-port=8069
+
+
+
+sudo systemctl start odoo
+to start odoooo
+sudo systemctl status odoo
+sudo systemctl restart odoo
+35.87.214.190
+
+
+
+sudo tail -f /var/log/odoo/odoo.log
+ for error check
+
+
+
+
+
+
+    *********deltee a module permantaly and shold not see in apps also****************
+
+step1:sudo rm -rf your_module_name...................to dleeted module
+
+
+
+# Navigate to the addons directory
+cd /opt/odoo/addons
+
+# Delete the module directory
+sudo rm -rf dr_home
+
+# Restart Odoo to clear the cache
+sudo systemctl restart odoo
+
+
+*************from data base*****************88
+# Update the Apps list in Odoo (via the web interface)
+# Check for residual data in the database (optional)
+sudo -u postgres psql
+\c your_database_name
+DELETE FROM ir_module_module WHERE name = 'dr_home';
+
+
+
+
+  		# Step 1: Upload the ZIP file to the AWS server
+	scp -i /path/to/your/private-key.pem /path/to/your/module.zip ubuntu@your-aws-ip:/tmp/
+
+		# Step 2: Connect to the AWS server
+	ssh -i /path/to/your/private-key.pem ubuntu@your-aws-ip
+
+		# Step 3: Navigate to the Odoo addons directory
+	cd /opt/odoo/addons
+
+		# Step 4: Move the ZIP file to the addons directory
+	sudo mv /tmp/module.zip /opt/odoo/addons/
+
+		# Step 5: Extract the ZIP file
+	sudo unzip module.zip
+
+		# Step 6: Set permissions
+	sudo chown -R odoo:odoo module-directory-name
+	sudo chmod -R 755 module-directory-name
+
+		# Step 7: Restart Odoo
+	sudo systemctl restart odoo
+
+

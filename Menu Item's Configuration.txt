@@ -1,0 +1,10 @@
+SETTING'S - Menu Items
+Click New
+Menu Items - Add Title
+Parent Menu - Add The Menu Item From Dropdown
+Sequence - Add Sequence(Place of Option 1,2,3,etc)
+Action - Select Action(ir.action.act_window) - SELECT MODEL
+Refresh
+
+
+

@@ -1,0 +1,24 @@
+New Module Deployment
+
+Step 1 : Open Command Prompt
+Step 2 : Paste : scp -i "C:\Users\SaiSandeepVaddiraju\Downloads\Edvenswa Ayurveda HMS (1).pem" "C:\Users\SaiSandeepVaddiraju\Desktop\HMS\HMS-STATISTICS-SUMMARY-DEPT.zip" ubuntu@35.87.214.190:/home/ubuntu/ (ZIP FILE MOVED TO SERVER)
+                                                                                                (ZIP FILE PATH)    
+Step 3 : Open Putty
+Step 4 : Upload FILE
+Step 5 : cd /home/ubuntu (enter command)
+Step 6 : ls
+Step 7 : sudo mv /home/ubuntu/odoo_dynamic_dashboard-18.0.1.0.2 (1).zip /opt/odoo/addons/
+                              (Replace Zip File Name)
+Step 8 : Extract the ZIP file - sudo unzip module.zip 
+         Ex : sudo unzip module.zip odoo_dynamic_dashboard-18.0.1.0.2 (1).zip
+
+Step 9 : sudo chown -R odoo:odoo /opt/odoo/addons
+          sudo chmod -R 755 /opt/odoo/addons
+
+sudo systemctl restart odoo - RESTART
+sudo systemctl status odoo - STATUS
+
+
+
+
+																				

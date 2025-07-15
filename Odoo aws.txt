@@ -1,0 +1,21 @@
+step 1:  scp -i "C:\Users\ManikantaGourishetty\Downloads\Edvenswa Ayurveda HMS.pem" "C:\Users\ManikantaGourishetty\Downloads\odoo_dynamic_dashboard-18.0.1.0.2 (1).zip" ubuntu@35.87.214.190:/home/ubuntu/
+
+step 2: ssh -i "C:\Users\ManikantaGourishetty\Downloads\Edvenswa Ayurveda HMS.pem"  ubuntu@35.87.214.190
+ 
+step 3:sudo mv /home/ubuntu/'consultations 17.zip /opt/odoo/addons/
+
+step 4:sudo chown -R odoo:odoo /opt/odoo/addons
+sudo chmod -R 755 /opt/odoo/addons
+
+step 5:cd /opt/odoo/addons
+
+step 6:sudo unzip your-file.zip
+
+step 7:sudo chown -R odoo:odoo /opt/odoo/addons
+sudo chmod -R 755 /opt/odoo/addons
+
+sudo systemctl restart odoo
+
+
+
+to dlete....sudo rm -rf your_module_name

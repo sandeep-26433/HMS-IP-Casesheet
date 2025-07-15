@@ -1,0 +1,25 @@
+				setupping odoo in vs code
+
+
+>>>>Link using wsl extension
+
+>>>>open windows and type wsl
+
+>>>u can see a new prompt 
+
+>>>type>>>cd /opt/odoo
+
+>>>>.code opens VS Code
+  ( if error occurs )
+  >>>>code .
+
+this helps to run the odoo code in vs code
+
+>>>download python debguar extensions packs 
+>>>xml extension for ur fast xml commands**
+
+
+to create anew module in vs code for our odoo code use this command in vs code
+
+>>>./odoo-bin scaffold first addons/
+    it create module naming first

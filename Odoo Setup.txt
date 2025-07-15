@@ -1,0 +1,115 @@
+ODOO SETUP
+
+
+>open cmd >> 
+
+step 1:wsl --install
+  *where it installs wsl kernel
+
+step 2:wsl --list --online 
+  *we get some list and we go for ubuntu installation
+
+
+step 3:wsl --install -d Ubuntu
+   * installation of ubuntu starts 
+
+
+>>>> now a new ubuntu cmd will be opened and our next setup continues within this
+
+open ubuntu prompt
+
+step4:sudo apt update && sudo apt upgrade -y
+
+step5:sudo apt install -y python3 python3-pip python3-dev libpq-dev build-essential \libxml2-dev libxslt1-dev zlib1g-dev libsasl2-dev \libldap2-dev libssl-dev wkhtmltopdf \nodejs npm
+
+step6:sudo apt install -y wget gnupg2
+
+step7:wget -qO - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/postgresql.asc
+
+step8:echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+
+step9:sudo apt update
+
+step10:sudo apt install -y postgresql-16
+     >>>>installing oy=ur database
+
+step11:sudo systemctl enable postgresql 
+   >>>>enabaling our data base
+        
+    *****(if error occurs try this)****
+      
+   :sudo service enable postgresql
+     >>>> If sudo systemctl enable postgresql is not working for you, especially in WSL (Windows Subsystem for Linux) where systemd is not enabled by default
+
+step12:sudo systemctl start postgresql
+         (if error occurs try this)
+       :sudeo service start postgresql
+
+step13:sudo -u postgres createuser -s odoo
+
+step14:cd /opt
+
+step15:sudo git clone https://github.com/odoo/odoo --branch 18.0 --depth 1
+
+step16:sudo chown -R $USER:$USER /opt/odoo
+
+step17:cd /opt/odoo
+
+step 18:python3 -m venv venv
+
+step19:sudo apt install -y python3.12-venv
+
+step20:python3 -m venv venv
+
+step21:source venv/bin/activate
+
+step22:pip install -r requirements.txt 
+
+step23:sudo nano /etc/odoo.conf
+
+step24:
+[options]
+admin_passwd = admin
+db_host = False
+db_port = False
+db_user = odoo
+db_password = False
+addons_path = /opt/odoo/addons
+    >>>chnage password u entered first
+
+step26: sudo nano /etc/postgresql/16/main/pg_hba.conf
+
+step27: # "local" is for Unix domain socket connections only
+local   all             all                                     md5
+local   all             odoo                                    md5
+
+step28:sudo systemctl restart postgresql
+
+
+step30: ALTER USER odoo WITH ENCRYPTED PASSWORD 'your_password'
+        >>>>enter ur password in plave of your password
+
+              
+
+step31:cd /opt/odoo
+
+step32:source venv/bin/activate
+
+step33:python3 /opt/odoo/odoo-bin --config=/etc/odoo.conf
+      >>>>>>>>here odoo starts rrunning in local host
+
+
+step34:psql -h localhost -U odoo -d postgres
+      >>>>>run this command in another ubunutu prompt to run ur database
+
+     to check the list of ports ruuning in ur pc
+
+step35:sudo lsof -i :8069
+    >>>>python3  12345  manikanta  3u  IPv4  345678  0t0  TCP localhost:8069
+                >>>>we get like this 
+       >>>>sudo kill 12345 command to kill all the ports
+\dt
+SELECT * FROM ;
+
+
+
